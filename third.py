@@ -1,6 +1,6 @@
 def je_prvocislo(cislo):
     if cislo < 2:
-        return True
+        return False
     for i in range(2, cislo):
         if cislo % i == 0:
             return False
