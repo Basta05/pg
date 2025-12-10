@@ -1,6 +1,6 @@
 def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
     
-    typ = figurka ["typ"]
+    typ = figurka["typ"]
     (x_start, y_start) = figurka["pozice"]
     (x_cil, y_cil) = cilova_pozice
 
@@ -31,29 +31,31 @@ def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
         if rovne:
             x_krok = 0
             if dr < 0:
-                x_krok == 1
-            elif x_krok > 0:
-                dr == -1
+                x_krok = 1
+            elif dr > 0:
+                x_krok = -1
+                
             y_krok = 0
             if dc < 0:
-                y_krok == 1
-            elif y_krok > 0:
-                dc == - 1
-        x_cesta = x_start + x_krok
-        y_cesta = y_start + y_krok
+                y_krok = 1
+            elif dc > 0:
+                y_krok = -1
+                
+            x_cesta = x_start + x_krok
+            y_cesta = y_start + y_krok
 
-        while (x_cesta, y_cesta) != (x_cil, y_cil):     #cyklus hleda prekazky
-            if (x_cesta, y_cesta) in obsazene_pozice:
-                return False
-            x_cesta += x_krok
-            y_cesta += y_krok
-        return True
+            while (x_cesta, y_cesta) != (x_cil, y_cil):
+                if (x_cesta, y_cesta) in obsazene_pozice:
+                    return False
+                x_cesta += x_krok
+                y_cesta += y_krok
+            return True
+        return False
 
     if typ == "střelec":
         diagonal = (abs(dr) == abs(dc))
 
         if diagonal:
-            
             x_krok = 0
             if dr < 0:      
                 x_krok = 1
@@ -70,13 +72,13 @@ def je_tah_mozny(figurka, cilova_pozice, obsazene_pozice):
             y_cesta = y_start + y_krok
             
             while (x_cesta, y_cesta) != (x_cil, y_cil):
-                
                 if (x_cesta, y_cesta) in obsazene_pozice:
                     return False 
                 
                 x_cesta += x_krok
                 y_cesta += y_krok
-        return True      
+            return True
+        return False
         
     if typ == "dáma":
         rovne = (dr == 0 or dc == 0)
@@ -121,15 +123,15 @@ if __name__ == "__main__":
     kral = {"typ": "král", "pozice": (1, 4)}
     obsazene_pozice = {(2, 2), (8, 2), (3, 3), (5, 4), (8, 3), (8, 8), (6, 3), (1, 4)}
 
-    print(je_tah_mozny(pesec, (3, 2), obsazene_pozice))  # hotovo True
-    print(je_tah_mozny(pesec, (4, 2), obsazene_pozice))  # hotovo False, protože pěšec se nemůže hýbat o dvě pole vpřed (pokud jeho výchozí pozice není v prvním řádku)
-    print(je_tah_mozny(pesec, (1, 2), obsazene_pozice))  # hotovo False, protože pěšec nemůže couvat
+    print(je_tah_mozny(pesec, (3, 2), obsazene_pozice))
+    print(je_tah_mozny(pesec, (4, 2), obsazene_pozice))
+    print(je_tah_mozny(pesec, (1, 2), obsazene_pozice))
 
-    print(je_tah_mozny(jezdec, (4, 4), obsazene_pozice))  # hotovo False, jezdec se pohybuje ve tvaru písmene L (2 pozice jedním směrem, 1 pozice druhým směrem)
-    print(je_tah_mozny(jezdec, (5, 4), obsazene_pozice))  # hotovo False, tato pozice je obsazená jinou figurou
-    print(je_tah_mozny(jezdec, (1, 2), obsazene_pozice))  # hotovo True
-    print(je_tah_mozny(jezdec, (9, 3), obsazene_pozice))  # hotovo False, je to pozice mimo šachovnici
+    print(je_tah_mozny(jezdec, (4, 4), obsazene_pozice))
+    print(je_tah_mozny(jezdec, (5, 4), obsazene_pozice))
+    print(je_tah_mozny(jezdec, (1, 2), obsazene_pozice))
+    print(je_tah_mozny(jezdec, (9, 3), obsazene_pozice))
 
-    print(je_tah_mozny(dama, (8, 1), obsazene_pozice))  # hotovo False, dámě v cestě stojí jiná figura
-    print(je_tah_mozny(dama, (1, 3), obsazene_pozice))  # hotovo False, dámě v cestě stojí jiná figura
-    print(je_tah_mozny(dama, (3, 8), obsazene_pozice))  # hotovo True
+    print(je_tah_mozny(dama, (8, 1), obsazene_pozice))
+    print(je_tah_mozny(dama, (1, 3), obsazene_pozice))
+    print(je_tah_mozny(dama, (3, 8), obsazene_pozice))
